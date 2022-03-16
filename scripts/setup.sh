@@ -53,7 +53,7 @@ if [[ $OS == "Ubuntu" ]]; then
   mkdir -p "$HOME"/.config/terminator
 
   # Copy the terminator config file to the terminator config directory
-  cp ../config/terminator/config "$HOME"/.config/terminator/config
+  cp ../.config/terminator/config "$HOME"/.config/terminator/config
 
   # Replace the terminator desktop file with the one from the repo
   sudo cp -rf ../config/terminator/terminator.desktop /usr/share/applications/
