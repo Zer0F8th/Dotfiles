@@ -1,0 +1,27 @@
+[global_config]
+  title_transmit_bg_color = "#2777ff"
+  enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, TerminatorThemes
+  title_use_system_font = False
+  title_font = Inter Bold 12
+[keybindings]
+  split_horiz = <Primary><Shift>h
+  split_vert = <Primary><Shift>Return
+[profiles]
+  [[default]]
+    cursor_color = "#aaaaaa"
+  [[Snazzy]]
+    background_color = "#282a36"
+    cursor_color = "#97979b"
+    font = JetBrainsMono Nerd Font Mono Medium 18
+    foreground_color = "#eff0eb"
+    palette = "#282a36:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#f1f1f0:#686868:#ff5c57:#5af78e:#f3f99d:#57c7ff:#ff6ac1:#9aedfe:#eff0eb"
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
