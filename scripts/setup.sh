@@ -80,6 +80,7 @@ if [[ $OS == "Fedora Linux" ]]; then
 
   # Install spaceship prompt
   git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM"/themes/spaceship-prompt --depth=1
+  ln -s "$ZSH_CUSTOM"/themes/spaceship-prompt/spaceship.zsh-theme "$ZSH_CUSTOM"/themes/spaceship.zsh-theme
 
   # Copy the zshrc file to the home directory, replacing the original
   cp -rf ../config/zsh/.zshrc "$HOME"/.zshrc
