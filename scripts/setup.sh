@@ -82,6 +82,6 @@ if [[ $OS == "Fedora Linux" ]]; then
   git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
 
   # Copy the zshrc file to the home directory, replacing the original
-  cp -rf ../config/zshrc/.zshrc "$HOME"/.zshrc
+  cp -rf ../config/zsh/.zshrc "$HOME"/.zshrc
 
 fi
