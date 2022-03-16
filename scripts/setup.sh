@@ -79,9 +79,11 @@ if [[ $OS == "Fedora Linux" ]]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM"/plugins/zsh-syntax-highlighting
 
   # Install spaceship prompt
-  git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+  git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM"/themes/spaceship-prompt --depth=1
 
   # Copy the zshrc file to the home directory, replacing the original
   cp -rf ../config/zsh/.zshrc "$HOME"/.zshrc
 
+  # Change the default shell to zsh
+  chsh -s "$(which zsh)"
 fi
