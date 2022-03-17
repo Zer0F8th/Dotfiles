@@ -34,7 +34,7 @@ if [[ $OS == "Fedora Linux" ]]; then
       terminator \
       python3-pip \
       python3-virtualenv \
-      util-linux-user \
+      util-linux \
       gnome-tweaks
 
   # Install Discord
