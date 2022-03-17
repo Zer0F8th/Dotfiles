@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ###########################################
 #----------) Terminal Setup (-------------#
 ###########################################
@@ -35,7 +36,7 @@ if [[ $OS == "Fedora Linux" ]]; then
       util-linux-user
 
   # Install Discord
-  sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+  sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm
   sudo dnf update
   sudo dnf install -y discord
 
@@ -53,7 +54,6 @@ if [[ $OS == "Fedora Linux" ]]; then
   sudo fc-cache -fv
 
   # Setup Terminator
-
   # Check if the terminator config directory exists
   if [[ ! -d "$HOME"/.config/terminator ]]; then
     mkdir -p "$HOME"/.config/terminator
@@ -68,6 +68,9 @@ if [[ $OS == "Fedora Linux" ]]; then
   # Fix permissions on the terminator desktop file
   sudo chown root:root /usr/share/applications/terminator.desktop &&
     sudo chmod 644 /usr/share/applications/terminator.desktop
+
+  # Fix padding issues with terminator
+  cp -rf ../config/gtk/gtk.css "$HOME"/.config/gtk-3.0/
 
   # Install Oh My Zsh
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
