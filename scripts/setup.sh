@@ -23,22 +23,29 @@ if [[ $OS == "Fedora Linux" ]]; then
   # Set the Oh My Zsh custom directory
   ZSH_CUSTOM="$HOME"/.oh-my-zsh/custom
   # Update the system and install dependencies
-  sudo dnf update &&
+  sudo dnf check-update &&
     sudo dnf upgrade -y &&
     sudo dnf install -y \
       git \
       zsh \
       vim \
       wget \
+      htop \
       terminator \
       python3-pip \
       python3-virtualenv \
-      util-linux-user
+      util-linux-user \
+      gnome-tweaks
 
   # Install Discord
-  sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm
-  sudo dnf update
-  sudo dnf install -y discord
+  sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm -y
+
+  # Install VS Code
+  sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+  sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+  sudo dnf check-update
+  sudo dnf install -y discord \
+                      code
 
   # Install fonts
   sudo cp -rf ../fonts/Hack/ /usr/share/fonts/
