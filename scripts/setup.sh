@@ -23,7 +23,7 @@ if [[ $OS == "Fedora Linux" ]]; then
   # Set the Oh My Zsh custom directory
   ZSH_CUSTOM="$HOME"/.oh-my-zsh/custom
   # Update the system and install dependencies
-  sudo dnf check-update &&
+  sudo dnf update &&
     sudo dnf upgrade -y &&
     sudo dnf install -y \
       git \
