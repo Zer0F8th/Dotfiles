@@ -18,11 +18,17 @@ else
 fi
 
 if [[ $OS == "Fedora Linux" ]]; then
+  echo "================================"
   echo "Fedora Linux"
   echo "================================"
-  # Set the Oh My Zsh custom directory
+
+  # Setup Automatic Updates for Fedora
+  AUTOMATIC_UPDATES=true
+  # Oh My Zsh custom directory
   ZSH_CUSTOM="$HOME"/.oh-my-zsh/custom
+
   # Update the system and install dependencies
+
   sudo dnf check-update
   sudo dnf upgrade -y &&
     sudo dnf install -y git \
@@ -34,7 +40,9 @@ if [[ $OS == "Fedora Linux" ]]; then
       python3-pip \
       python3-virtualenv \
       util-linux-user \
-      gnome-tweaks
+      gnome-tweaks \
+      gtk-murrine-engine \
+      stacer
 
   # Install Discord
   sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm -y
@@ -93,6 +101,34 @@ if [[ $OS == "Fedora Linux" ]]; then
 
   # Copy the zshrc file to the home directory, replacing the original
   cp -rf ../config/zsh/.zshrc "$HOME"/.zshrc
+
+
+
+  # Install Orchis Theme
+  cd "$HOME"/Downloads || {
+    echo "Error: Could not change to the '$HOME/Downloads/' directory."
+    exit 1
+  }
+  git clone https://github.com/vinceliuice/Orchis-theme.git
+  cd Orchis-theme || {
+    echo "Error: Could not change to the '$HOME/Downloads/Orchis-theme/' directory."
+    exit 1
+  }
+  ./install.sh
+
+  # Cleanup the downloads directory
+  cd "$HOME"/Downloads || {
+    echo "Error: Could not change to the '$HOME/Downloads/' directory."
+    exit 1
+  }
+  rm -rf Orchis-theme
+
+  # Install dnf automatic updates
+  if [[ $AUTOMATIC_UPDATES == true ]]; then
+    sudo dnf check-update
+    sudo dnf upgrade -y && sudo dnf install -y dnf-automatic
+    systemctl enable --now dnf-automatic.timer
+  fi
 
   # Change the default shell to zsh
   chsh -s "$(which zsh)"
