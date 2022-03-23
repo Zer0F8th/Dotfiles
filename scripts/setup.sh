@@ -30,20 +30,20 @@ if [[ $OS == "Fedora Linux" ]]; then
   # Update the system and install dependencies
 
   sudo dnf check-update
-  sudo dnf upgrade -y &&
-    sudo dnf install -y git \
-      zsh \
-      vim \
-      wget \
-      htop \
-      terminator \
-      python3-pip \
-      python3-virtualenv \
-      util-linux-user \
-      gnome-tweaks \
-      gtk-murrine-engine \
-      gnome-shell-extensions \
-      stacer
+  sudo dnf upgrade -y
+  sudo dnf install -y git \
+    zsh \
+    vim \
+    wget \
+    htop \
+    terminator \
+    python3-pip \
+    python3-virtualenv \
+    util-linux-user \
+    gnome-tweaks \
+    gtk-murrine-engine \
+    gnome-shell-extensions \
+    stacer
 
   # Install Discord
   sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm -y
