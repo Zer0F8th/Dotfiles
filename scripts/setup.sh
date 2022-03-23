@@ -42,6 +42,7 @@ if [[ $OS == "Fedora Linux" ]]; then
       util-linux-user \
       gnome-tweaks \
       gtk-murrine-engine \
+      gnome-shell-extensions \
       stacer
 
   # Install Discord
@@ -102,26 +103,35 @@ if [[ $OS == "Fedora Linux" ]]; then
   # Copy the zshrc file to the home directory, replacing the original
   cp -rf ../config/zsh/.zshrc "$HOME"/.zshrc
 
-
-
-  # Install Orchis Theme
+  # Install Orchis Theme and Tela Circle Icons
   cd "$HOME"/Downloads || {
     echo "Error: Could not change to the '$HOME/Downloads/' directory."
     exit 1
   }
   git clone https://github.com/vinceliuice/Orchis-theme.git
+  git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
+
   cd Orchis-theme || {
     echo "Error: Could not change to the '$HOME/Downloads/Orchis-theme/' directory."
     exit 1
   }
   ./install.sh
 
-  # Cleanup the downloads directory
+  cd "$HOME"/Downloads/Tela-circle-icon-theme/ || {
+    echo "Error: Could not change to the '$HOME/Downloads/' directory."
+    exit 1
+  }
+  ./install.sh
+
+  # Cleanup
   cd "$HOME"/Downloads || {
     echo "Error: Could not change to the '$HOME/Downloads/' directory."
     exit 1
   }
   rm -rf Orchis-theme
+  rm -rf Tela-circle-icon-theme
+
+  # Install Tela Circle Icons
 
   # Install dnf automatic updates
   if [[ $AUTOMATIC_UPDATES == true ]]; then
