@@ -98,12 +98,9 @@ sudo dnf config-manager \
   --add-repo \
   https://download.docker.com/linux/fedora/docker-ce.repo
 sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-sudo groupadd docker
 sudo usermod -aG docker "$USER"
-newgrp docker
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
-sudo systemctl start docker
 
 # Kubernetes Install
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
