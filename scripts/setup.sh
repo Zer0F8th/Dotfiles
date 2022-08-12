@@ -80,14 +80,22 @@ sudo dnf install -y discord \
   code
 
 # Install fonts
-sudo cp -rf ../fonts/hack/ /usr/share/fonts/
-sudo cp -rf ../fonts/jetbrains-mono/ /usr/share/fonts/
+if [ ! -d "$script_root_dir"/fonts/hack ]; then
+  echo "Hack font not found. Exiting..."
+  exit 1
+fi
+if [ ! -d "$script_root_dir"/fonts/jetbrains-mono ]; then
+  echo "Hack font not found. Exiting..."
+  exit 1
+fi
+sudo cp -rf "$script_root_dir"/fonts/hack/ /usr/share/fonts/
+sudo cp -rf "$script_root_dir"/fonts/jetbrains-mono/ /usr/share/fonts/
 
 # Fix permissions on the font directory and the ttf files
 sudo chown -R root:root /usr/share/fonts/hack
 sudo chown -R root:root /usr/share/fonts/jetbrains-mono
 sudo chmod 755 /usr/share/fonts/hack && sudo chmod 644 /usr/share/fonts/hack/*.ttf
-sudo chmod 755 /usr/share/fonts/JetBrainsMono && sudo chmod 644 /usr/share/fonts/jetbrains-mono/*.ttf
+sudo chmod 755 /usr/share/fonts/jetbrains-mono && sudo chmod 644 /usr/share/fonts/jetbrains-mono/*.ttf
 
 # Refresh the font directory cache
 sudo fc-cache -fv
