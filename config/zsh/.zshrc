@@ -74,6 +74,7 @@ plugins=(
 	git
 	zsh-autosuggestions
 	zsh-syntax-highlighting
+	kubectl
 	)
 
 source $ZSH/oh-my-zsh.sh
@@ -112,18 +113,14 @@ source $ZSH/oh-my-zsh.sh
 # Help Page to help remember the commands
 alias mkhelp="cat << EOF
 Aliases:
-mkcd:           create a new directory and enter it.
 ll:             list directory contents, including hidden files in human readable format.
 l.:             list hidden files.
-ll.:            lists all hidden files in long and human readable format.
+cls:            prints out chmod permissions in number format.
 path:           print PATH variable in column format.
 ports:          list ports that are open on the system.
-serve:          start a python3 web server.
+server:         start a python3 web server.
 EOF
 "
-# Makes a directory and cds into it.
-alias mkcd="mkdir '$1' && cd '$1'"
-
 # (Just in case lol) Enforce that rm prompts for confirmation and that root is never removed.
 alias rm="rm -I --preserve-root"
 
@@ -133,18 +130,17 @@ alias ll="ls -alh"
 # List all hidden files.
 alias l.="ls -d .*"
 
-
 # Lists all files using chmod number format.
 alias cls="ls -al | awk   '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf(\"%0o \",k);print}'"
 
 # Get PATH of current shell in a formatted column.
-alias path="echo -e ${PATH//:/\\n}"
+alias path="echo "$PATH" | tr ':' '\n'"
 
 # List ports
 alias ports="ss -tulpn"
 
 # Start a python3 webserver.
-alias serve="python3 -m http.server"
+alias server="python3 -m http.server"
 
 
 # ==================================================================

@@ -67,6 +67,7 @@ sudo dnf upgrade -y &&
     gtk-murrine-engine \
     gnome-extensions-app \
     ffmpeg-free \
+    sassc \
     stacer
 
 # Add RPM Fusion Repository
@@ -91,6 +92,15 @@ fi
 sudo cp -rf "$script_root_dir"/fonts/hack/ /usr/share/fonts/
 sudo cp -rf "$script_root_dir"/fonts/jetbrains-mono/ /usr/share/fonts/
 
+# Install wallpaper
+mkdir -p "$HOME"/Pictures/wallpapers
+wallpaper_dir="$HOME"/Pictures/wallpapers
+wallpaper_file="$wallpaper_dir"/wallpaper.jpg
+cp -rf "$script_root_dir"/wallpaper/ "$wallpaper_dir"
+
+gsettings set org.gnome.desktop.background picture-uri file:///"$wallpaper_file"
+gsettings set org.gnome.desktop.background picture-uri-dark file:///"$wallpaper_file"
+
 # Fix permissions on the font directory and the ttf files
 sudo chown -R root:root /usr/share/fonts/hack
 sudo chown -R root:root /usr/share/fonts/jetbrains-mono
@@ -109,12 +119,16 @@ sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo usermod -aG docker "$USER"
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
-
+curl -LO "https://desktop.docker.com/linux/main/amd64/docker-desktop-4.11.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64"
+sudo dnf install -y ./docker-desktop-4.11.1-x86_64.rpm
 # Kubernetes Install
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
 sudo rpm -Uvh minikube-latest.x86_64.rpm
+
+sudo rm -rf docker-desktop-4.11.1-x86_64.rpm
+sudo rm -rf minikube-latest.x86_64.rpm
 
 # Setup Terminator
 # Check if the terminator config directory exists
@@ -179,6 +193,7 @@ cd "$HOME"/Downloads || {
 }
 rm -rf Orchis-theme
 rm -rf Tela-circle-icon-theme
+rm -rf minikube-latest.x86_64.rpm
 
 # Install dnf automatic updates
 if [[ $auto_updates == true ]]; then
@@ -195,7 +210,6 @@ if [[ $projects_dir == true ]]; then
     exit 1
   }
   mkdir -p Projects/VSCode Projects/JetBrains/IntelliJ Projects/JetBrains/PyCharm Project/JetBrains/CLion
-  sudo chown -R "$USER":"$USER" "$HOME"/Projects
 fi
 
 # Change the default shell to zsh
