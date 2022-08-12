@@ -96,7 +96,7 @@ sudo cp -rf "$script_root_dir"/fonts/jetbrains-mono/ /usr/share/fonts/
 mkdir -p "$HOME"/Pictures/wallpapers
 wallpaper_dir="$HOME"/Pictures/wallpapers
 wallpaper_file="$wallpaper_dir"/wallpaper.jpg
-cp -rf "$script_root_dir"/wallpaper/ "$wallpaper_dir"
+cp -rf "$script_root_dir"/images/ "$wallpaper_dir"
 
 gsettings set org.gnome.desktop.background picture-uri file:///"$wallpaper_file"
 gsettings set org.gnome.desktop.background picture-uri-dark file:///"$wallpaper_file"
