@@ -97,20 +97,19 @@ sudo dnf -y install dnf-plugins-core
 sudo dnf config-manager \
   --add-repo \
   https://download.docker.com/linux/fedora/docker-ce.repo
-sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo groupadd docker
 sudo usermod -aG docker "$USER"
 newgrp docker
-sudo systemctl start docker
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
+sudo systemctl start docker
 
 # Kubernetes Install
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
 sudo rpm -Uvh minikube-latest.x86_64.rpm
-
 
 # Setup Terminator
 # Check if the terminator config directory exists
@@ -119,6 +118,7 @@ if [[ ! -d "$HOME"/.config/terminator ]]; then
 fi
 
 # Copy the terminator config file to the terminator config directory
+DEBUG echo "Copying terminator config file $script_config_dir/terminator/config to $HOME/.config/terminator"
 cp -rf "$script_config_dir"/terminator/config "$HOME"/.config/terminator/config
 
 # Replace the terminator desktop file with the one from the repo
