@@ -94,7 +94,7 @@ sudo cp -rf "$script_root_dir"/fonts/jetbrains-mono/ /usr/share/fonts/
 
 # Install wallpaper
 mkdir -p "$HOME"/Pictures/wallpapers
-wallpaper_dir="$HOME"/Pictures/wallpapers
+wallpaper_dir="$HOME"/Pictures/wallpapers/images
 wallpaper_file="$wallpaper_dir"/wallpaper.jpg
 cp -rf "$script_root_dir"/images/ "$wallpaper_dir"
 
