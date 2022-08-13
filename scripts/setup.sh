@@ -68,6 +68,7 @@ sudo dnf upgrade -y &&
     gnome-extensions-app \
     ffmpeg-free \
     sassc \
+    gnome-shell-extension-user-theme \
     stacer
 
 # Add RPM Fusion Repository
@@ -119,7 +120,7 @@ sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo usermod -aG docker "$USER"
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
-curl -LO "https://desktop.docker.com/linux/main/amd64/docker-desktop-4.11.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64"
+wget https://desktop.docker.com/linux/main/amd64/docker-desktop-4.11.1-x86_64.rpm
 sudo dnf install -y ./docker-desktop-4.11.1-x86_64.rpm
 # Kubernetes Install
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -185,6 +186,10 @@ cd "$HOME"/Downloads/Tela-circle-icon-theme/ || {
   exit 1
 }
 ./install.sh
+
+# Install Icons
+gsettings set org.gnome.desktop.interface icon-theme Tela-circle-dark
+
 
 # Cleanup
 cd "$HOME"/Downloads || {
